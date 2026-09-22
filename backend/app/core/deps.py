@@ -105,5 +105,5 @@ def assert_subscription_writable(db: Session, tenant_id: UUID) -> None:
     if sub.status in ("past_due", "canceled") or sub.current_period_end < today:
         raise HTTPException(
             status_code=status.HTTP_402_PAYMENT_REQUIRED,
-            detail="Assinatura vencida ou bloqueada — só leitura",
+            detail="Assinatura vencida ou bloqueada. Só leitura.",
         )

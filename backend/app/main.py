@@ -10,7 +10,7 @@ settings = get_settings()
 
 app = FastAPI(
     title="OficinaFlow API",
-    description="SaaS B2B multi-tenant — agenda + ordem de serviço para oficinas",
+    description="SaaS B2B multi-tenant de agenda e ordem de serviço para oficinas",
     version="1.0.0",
 )
 

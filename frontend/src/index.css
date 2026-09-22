@@ -54,7 +54,7 @@ textarea {
   font: inherit;
 }
 
-/* —— Shell full viewport —— */
+/* -- Shell full viewport -- */
 .app-shell {
   display: grid;
   grid-template-columns: 200px minmax(0, 1fr);
@@ -167,7 +167,7 @@ textarea {
   color: #fff;
 }
 
-/* main fills remaining width — no max-width */
+/* main fills remaining width, no max-width */
 .main {
   display: flex;
   flex-direction: column;
@@ -228,7 +228,7 @@ textarea {
   padding: 0;
 }
 
-/* toolbar strip — not a floating card */
+/* toolbar strip, not a floating card */
 .toolbar {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
@@ -473,7 +473,7 @@ td {
   gap: 0.3rem;
 }
 
-/* —— Kanban full width + stretch —— */
+/* -- Kanban full width + stretch -- */
 .board {
   flex: 1;
   display: grid;
@@ -550,7 +550,7 @@ td {
   color: var(--muted);
 }
 
-/* —— Login —— */
+/* -- Login -- */
 .login-page {
   min-height: 100vh;
   display: grid;

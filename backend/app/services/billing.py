@@ -145,7 +145,7 @@ def accept_pix_webhook(db: Session, payload: dict) -> dict:
         raise HTTPException(
             status_code=503,
             detail={
-                "message": "Fila indisponível — evento persistido como recebido",
+                "message": "Fila indisponível. Evento persistido como recebido.",
                 "event_id": str(event.id),
                 "status": "recebido",
                 "note": str(exc)[:120],

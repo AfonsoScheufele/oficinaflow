@@ -9,7 +9,7 @@ Não é frete, não é courier, não é tracking. O problema de negócio é outr
 ## Stack
 
 - Front: React, TypeScript, Vite (porta **5175**)
-- API: Python, FastAPI, SQLAlchemy, Alembic (porta **8002** — 8001 costuma ser Redis Insight)
+- API: Python, FastAPI, SQLAlchemy, Alembic (porta **8002**; 8001 costuma ser Redis Insight)
 - Banco: PostgreSQL 16 (**5436**) + Redis 7 (**6383**)
 - Auth: JWT em cookie httpOnly
 - Fila: RQ no webhook de billing (`RQ_ASYNC=false` local = job no mesmo processo; `true` = worker separado)
@@ -23,7 +23,7 @@ Valores em centavos (`int`), tela em `R$ 1.234,56`, datas `DD/MM/AAAA`, fuso `Am
 1. **Accept ≠ apply.** O HTTP do webhook só autentica, rate-limita, grava `WebhookEvent` (unique `event_key` + `payload_hash`) e enfileira. O efeito no `Payment`/`Subscription` roda no job. Se a fila cair → **503** e o evento fica `recebido` (falha parcial observável, não “sumiu”).
 2. **Ciclo de vida:** `recebido → processando → processado | falhou`, com `attempts`, `last_error`, `processed_at`. Duplicata responde `duplicate: true` (também via `IntegrityError` sob corrida).
 3. **Tenant no token, nunca no body.** Isolamento testado (A não lê OS de B = 404). STAFF bloqueado em billing/equipe (403). Assinatura vencida = **402** nas mutações.
-4. **Audit append-only** em checkout, membership e soft deletes — quem fez o quê.
+4. **Audit append-only** em checkout, membership e soft deletes: quem fez o quê.
 5. **Observabilidade de billing na UI:** pagamentos + webhook events (tenant) e stats/falhas (platform admin).
 
 ## Máquinas de estado
@@ -52,7 +52,7 @@ sequenceDiagram
   Note over API,Queue: Redis down = 503, evento permanece recebido
 ```
 
-Local: `RQ_ASYNC=false` (default) executa o job no accept via RQ sync — **mesmo código do worker**. Com `RQ_ASYNC=true`, use `make worker`.
+Local: `RQ_ASYNC=false` (default) executa o job no accept via RQ sync (**mesmo código do worker**). Com `RQ_ASYNC=true`, use `make worker`.
 
 Se `past_due` / `canceled` / `current_period_end` vencido → mutações de agenda/OS retornam **402**. Webhook duplicado responde `duplicate: true`.
 

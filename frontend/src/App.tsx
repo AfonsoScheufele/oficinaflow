@@ -86,7 +86,7 @@ function Login({ onLogin }: { onLogin: (m: Me) => void }) {
           <p className="eyebrow">SaaS B2B · Multi-tenant</p>
           <h1 className="brand">OficinaFlow</h1>
           <p>
-            Agenda e ordens de serviço para oficinas — cada empresa no seu espaço, com papéis
+            Agenda e ordens de serviço para oficinas. Cada empresa no seu espaço, com papéis
             claros e assinatura da plataforma.
           </p>
         </div>
@@ -229,7 +229,7 @@ function Agenda() {
       <PageHead
         eyebrow="Dia a dia"
         title="Agenda"
-        subtitle="Horários da oficina — confirme, inicie e conclua."
+        subtitle="Horários da oficina: confirme, inicie e conclua."
       />
       <div className="page-body">
         <div className="stat-row">
@@ -367,7 +367,7 @@ function WorkOrdersPage() {
       <PageHead
         eyebrow="Chão da oficina"
         title="Ordens de serviço"
-        subtitle="Quadro por status — do rascunho à entrega."
+        subtitle="Quadro por status, do rascunho à entrega."
       />
       <div className="page-body">
         {err && <div className="error">{err}</div>}
@@ -462,7 +462,7 @@ function CustomersPage() {
 
   return (
     <div className="page">
-      <PageHead eyebrow="Cadastro" title="Clientes" subtitle="Base do tenant — nome, telefone e documento BR." />
+      <PageHead eyebrow="Cadastro" title="Clientes" subtitle="Base do tenant: nome, telefone e documento BR." />
       <div className="page-body">
         <form onSubmit={create} className="toolbar cols-3">
           <div className="field">
@@ -496,8 +496,8 @@ function CustomersPage() {
             {items.map((c) => (
               <tr key={c.id}>
                 <td>{c.name}</td>
-                <td>{c.phone || "—"}</td>
-                <td>{c.document || "—"}</td>
+                <td>{c.phone || "-"}</td>
+                <td>{c.document || "-"}</td>
                 <td>
                   <button
                     type="button"
@@ -630,7 +630,7 @@ function BillingPage() {
     try {
       const out = await api.simulateWebhook(checkout.payment_id);
       if (out?.status === "processado") {
-        setMsg("Webhook processado — assinatura active.");
+        setMsg("Webhook processado. Assinatura ativa.");
       } else if (out?.duplicate) {
         setMsg(`Duplicata (status ${out.status}).`);
       } else {
@@ -648,7 +648,7 @@ function BillingPage() {
       <PageHead
         eyebrow="Plano da plataforma"
         title="Assinatura"
-        subtitle="Cobrança do SaaS (Pix demo) — webhook com ciclo de vida e falha visível."
+        subtitle="Cobrança do SaaS (Pix demo) com webhook, ciclo de vida e falha visível."
       />
       <div className="page-body">
         {err && <div className="error">{err}</div>}
@@ -740,7 +740,7 @@ function BillingPage() {
                   </td>
                   <td>{e.attempts}</td>
                   <td>
-                    <code style={{ fontSize: "0.75rem" }}>{e.last_error || "—"}</code>
+                    <code style={{ fontSize: "0.75rem" }}>{e.last_error || "-"}</code>
                   </td>
                   <td>{formatDateBR(e.created_at)}</td>
                 </tr>
@@ -791,7 +791,7 @@ function TeamPage() {
       <PageHead
         eyebrow="Gestão"
         title="Equipe"
-        subtitle="Memberships do tenant — limite conforme o plano."
+        subtitle="Memberships do tenant, com limite conforme o plano."
       />
       <div className="page-body">
         {err && <div className="error">{err}</div>}
@@ -941,7 +941,7 @@ function PlatformPage() {
                     </td>
                     <td>{e.attempts}</td>
                     <td>
-                      <code style={{ fontSize: "0.75rem" }}>{e.last_error || "—"}</code>
+                      <code style={{ fontSize: "0.75rem" }}>{e.last_error || "-"}</code>
                     </td>
                   </tr>
                 ))}
